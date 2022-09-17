@@ -1,0 +1,18 @@
+<h2>Por capital</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-country-input filterType="Buscar por capital" (onEnter)="search($event)" (onDebounce)="suggestions($event)"></app-country-input>
+    </div>
+</div>
+<hr>
+<div *ngIf="isFailedResponse" class="alert alert-danger">
+    No se encontró el/los pais/es con letras {{word}}
+</div>
+
+<div *ngIf="countries.length > 0" class="row">
+    <div class="col">
+        <app-country-list [countries]="countries"></app-country-list>
+    </div>
+</div>
