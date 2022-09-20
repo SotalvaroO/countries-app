@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Country } from '../interfaces/country.interface';
@@ -23,5 +23,15 @@ export class CountryService {
   public getByAlpha(id: string): Observable<Country> {
     return this.http.get<Country>(`${this.API_URL}/alpha/${id}`);
     /* .pipe(catchError((err) => of([]))) */ //Otra forma
+  }
+
+  public getByRegion(region: string): Observable<Country[]> {
+    const params = new HttpParams().set(
+      'fields',
+      'name,capital,alpha2code,flag,population'
+    );
+    return this.http.get<Country[]>(`${this.API_URL}/region/${region}`, {
+      params: params,
+    });
   }
 }

@@ -1,1 +1,20 @@
-<p>region-filter works!</p>
+<h3>Buscar por region <small>{{activatedRegion | titlecase}}</small></h3>
+<hr>
+
+<h5>Seleccione la region</h5>
+<div class="row">
+    <div class="col">
+        <!-- [class.btn-primary]="region === activatedRegion" [class.text-white]="region === activatedRegion" -->
+        <!-- [ngClass]="{
+            'btn-primary':activatedRegion === region,
+            'btn-outline-primary':activatedRegion !== region 
+        }" -->
+        <!-- class="btn btn-outline-primary" -->
+        <button [class]="(region === activatedRegion) ? 'btn btn-primary': 'btn btn-outline-primary'"
+            *ngFor="let region of regions" (click)="activateRegion(region)">
+            {{region|titlecase}}
+        </button>
+        <hr>
+        <app-country-list [countries]="countries"></app-country-list>
+    </div>
+</div>
